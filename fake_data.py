@@ -1,7 +1,13 @@
+"""
+Create fake data using the IT providers for fiscal codes and dates.
+The random lib is used to create doc number and decide the doc type.
+"""
+
 from random import randint, choice
 from faker import Faker
 
 
+#@num_people2create: how many fake rows I want to create. If no parameter is passed, the default is 1.
 def create_fake_data(num_people2create=1):
 
     fake = Faker('it_IT')

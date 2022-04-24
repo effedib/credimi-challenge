@@ -1,3 +1,11 @@
+"""
+Check the document status.
+If the expire date is past, the status will be 'Expired'.
+If the expire date is between today and (today + 30 days) the status will be 'Expiring'.
+If the expire date is > (today + 30 days), the status will be 'Valid'.
+"""
+
+
 from datetime import date, timedelta
 
 
