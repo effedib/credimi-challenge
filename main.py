@@ -9,7 +9,6 @@ The response will show the detailed documents stored for that fiscal code, using
   ID Document Issuing Date
   Status
 }
-
 """
 
 
