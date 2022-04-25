@@ -14,8 +14,8 @@ The response will show the detailed documents stored for that fiscal code, using
 
 from flask import Flask
 import json
-from query_fake_data import query_fc
-from check_status_doc import check_status_doc
+from db.query_fake_data import query_fc
+from utils.check_status_doc import check_status_doc
 
 app = Flask('app')
 
