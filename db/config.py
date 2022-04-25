@@ -2,6 +2,7 @@ from configparser import ConfigParser
 
 
 def config_postgres(filename='config.ini'):
+
     parser = ConfigParser()
     parser.read_file(open(filename))
 

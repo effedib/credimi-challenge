@@ -1,5 +1,5 @@
 import psycopg2.extras
-from config import config_postgres
+from db.config import config_postgres
 
 
 def query_fc(fiscal_code):
