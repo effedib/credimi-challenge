@@ -6,10 +6,9 @@ If the 'expire date' is > (today + 30 days), the status will be 'Valid'.
 """
 
 
-from datetime import date, timedelta
-
-
 def check_status_doc(expire_date):
+    from datetime import date, timedelta
+
     if (expire_date - date.today()) > timedelta(days=30):
         status = 'Valid'
     elif timedelta(days=1) <= (expire_date - date.today()) <= timedelta(days=30):
@@ -18,3 +17,14 @@ def check_status_doc(expire_date):
         status = 'Expired'
 
     return status
+
+
+# Check if the fiscal code has a correct format.
+def is_valid_fiscal_code(fiscal_code):
+    pass
+
+
+if __name__ == '__main__':
+    print(is_valid_fiscal_code('DBLFNC69P52D994G'))
+    print(is_valid_fiscal_code('1BLFNC69P52D994G'))
+    print(is_valid_fiscal_code('BLFNC69P52994'))

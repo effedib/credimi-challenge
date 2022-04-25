@@ -15,7 +15,7 @@ The response will show the detailed documents stored for that fiscal code, using
 from flask import Flask
 import json
 from db.query_fake_data import query_fc
-from utils.utils import check_status_doc
+from utils.utils import check_status_doc, is_valid_fiscal_code
 
 
 app = Flask('app')
@@ -28,6 +28,8 @@ def hello_world():
 
 @app.route('/<fiscal_code>')
 def check_docs(fiscal_code):
+    if not is_valid_fiscal_code(fiscal_code):
+        return '<h1>Invalid Fiscal Code, please retry</h1>'
     # store the query results in a list of lists
     doc_list = query_fc(fiscal_code)
     output = []
