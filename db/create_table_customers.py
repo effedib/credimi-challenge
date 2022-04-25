@@ -1,12 +1,14 @@
 import psycopg2
-from config import config_postgres
+from db.config import config_postgres
 
 
-def create_table():
+def create_table(params=None):
+    if params is None:
+        params = config_postgres()
     conn = None
 
     try:
-        params = config_postgres()
+
         with psycopg2.connect(**params) as conn:
 
             with conn.cursor() as cur:
@@ -30,7 +32,7 @@ def create_table():
         if conn is not None:
             conn.close()
 
-    return 0
+    return 1
 
 
 if __name__ == '__main__':

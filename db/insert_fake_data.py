@@ -1,13 +1,16 @@
 import psycopg2
-from fake_data import create_fake_data
-from config import config_postgres
+from db.fake_data import create_fake_data
+from db.config import config_postgres
 
 
-def insert_fake_SQL(n):
+def insert_fake_SQL(n, params=None):
+    if params is None:
+        params = config_postgres()
     conn = None
     try:
-        params = config_postgres()
+
         with psycopg2.connect(**params) as conn:
+
             with conn.cursor() as cur:
                 insert_fake_data = ''' INSERT INTO customers
                     ("Fiscal_code", "ID_Document_Number", "ID_Document_Type", "ID_Document_Issue_Date", "ID_Document_Expiring_Date")
@@ -25,7 +28,7 @@ def insert_fake_SQL(n):
         if conn is not None:
             conn.close()
 
-    return 0
+    return 1
 
 
 if __name__ == '__main__':
