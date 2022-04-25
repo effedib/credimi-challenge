@@ -12,8 +12,14 @@ def query_fc(fiscal_code):
         with psycopg2.connect(**params) as conn:
 
             with conn.cursor() as cur:
-                cur.execute('''SELECT "Fiscal_code", "ID_Document_Number", "ID_Document_Type", "ID_Document_Issue_Date", "ID_Document_Expiring_Date"
-                                from "customers" where "Fiscal_code" = \'{}\''''.format(fiscal_code))
+                select = '''SELECT "Fiscal_code", "ID_Document_Number", "ID_Document_Type", "ID_Document_Issue_Date", "ID_Document_Expiring_Date"
+                                from "customers" '''
+
+                if fiscal_code != 'all':
+                    where = '''where "Fiscal_code" = \'{}\''''.format(fiscal_code)
+                    cur.execute('{}{}'.format(select, where))
+                else:
+                    cur.execute(select)
 
                 personal_data = cur.fetchall()
 

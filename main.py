@@ -32,7 +32,8 @@ def hello_world():
 @app.route('/<fiscal_code>')
 def retrieve_docs(fiscal_code):
     # if is an invalid fiscal code, give an invalid input response
-    if not is_valid_fiscal_code(fiscal_code):
+    if not is_valid_fiscal_code(fiscal_code) and not fiscal_code == 'all':
+        print(fiscal_code)
         return '<h1>Invalid Fiscal Code, please retry using a valid Italian format</h1>'
     # store the query results in a list of lists
     doc_list = query_fc(fiscal_code)
