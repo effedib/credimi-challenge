@@ -1,21 +1,15 @@
 import psycopg2.extras
+from config import config_postgres
 
 
 def query_fc(fiscal_code):
-    hostname = 'localhost'
-    database = 'postgres'
-    username = 'postgres'
-    pwd = 'amoidb'
-    port_id = '5433'
+
     conn = None
     personal_data = None
+
     try:
-        with psycopg2.connect(
-                host=hostname,
-                dbname=database,
-                user=username,
-                password=pwd,
-                port=port_id) as conn:
+        params = config_postgres()
+        with psycopg2.connect(**params) as conn:
 
             with conn.cursor() as cur:
                 cur.execute('''SELECT "Fiscal_code", "ID_Document_Number", "ID_Document_Type", "ID_Document_Issue_Date", "ID_Document_Expiring_Date"

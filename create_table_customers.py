@@ -1,23 +1,13 @@
 import psycopg2
-
-hostname = 'localhost'
-database = 'postgres'
-username = 'postgres'
-pwd = 'amoidb'
-port_id = '5433'
-conn = None
-cur = None
+from config import config_postgres
 
 
 def create_table():
+    conn = None
+
     try:
-        with psycopg2.connect(
-                host=hostname,
-                dbname=database,
-                user=username,
-                password=pwd,
-                port=port_id
-        ) as conn:
+        params = config_postgres()
+        with psycopg2.connect(**params) as conn:
 
             with conn.cursor() as cur:
                 create_table_customers = ''' CREATE TABLE IF NOT EXISTS customers(

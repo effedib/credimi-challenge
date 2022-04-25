@@ -1,25 +1,13 @@
 import psycopg2
 from fake_data import create_fake_data
-
-hostname = 'localhost'
-database = 'postgres'
-username = 'postgres'
-pwd = 'amoidb'
-port_id = '5433'
-conn = None
-cur = None
+from config import config_postgres
 
 
 def insert_fake_SQL(n):
+    conn = None
     try:
-        with psycopg2.connect(
-                host=hostname,
-                dbname=database,
-                user=username,
-                password=pwd,
-                port=port_id
-        ) as conn:
-
+        params = config_postgres()
+        with psycopg2.connect(**params) as conn:
             with conn.cursor() as cur:
                 insert_fake_data = ''' INSERT INTO customers
                     ("Fiscal_code", "ID_Document_Number", "ID_Document_Type", "ID_Document_Issue_Date", "ID_Document_Expiring_Date")
